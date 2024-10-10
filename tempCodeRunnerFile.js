@@ -1,0 +1,1 @@
+const { createjobtitle,getjobdetails, deletejob,updatejobdetails} = require('./jobtitle');
