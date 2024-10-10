@@ -17,24 +17,27 @@ export default function Login() {
     setLoading(true);
     setError('');
     try {
-      const res = await axios.post('http://localhost:5000/login', {
-        username,
-        password,
-      },{ withCredentials: true });
-  
-      if (res.status === 200) {
-        console.log(res.data);
-        router.push('/dashboard'); // Redirect only if login is successful
-      } else {
-        setError('Login failed: unexpected status code');
-      }
+        const res = await axios.post('http://localhost:5000/login', {
+            username,
+            password,
+        }, { withCredentials: true });
+
+        if (res.status === 200) {
+            console.log(res.data);
+            // Save the token in local storage or session storage
+            localStorage.setItem('authToken', res.data.token); // Adjust based on your API response
+            router.push('/dashboard'); // Redirect only if login is successful
+        } else {
+            setError('Login failed: unexpected status code');
+        }
     } catch (err) {
-      console.error('Login error:', err);
-      setError('Login failed: ' + (err.response?.data?.message || 'Network or server issue'));
+        console.error('Login error:', err);
+        setError('Login failed: ' + (err.response?.data?.message || 'Network or server issue'));
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  }
+}
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

@@ -88,8 +88,22 @@ const updateUser = async (req, res) => {
   }
 };
 
+
+const getAllUsers = async (req, res) => {
+  try {
+      auth.authenticateToken(req, res, ['HR Manager', 'Admin'], async () => {
+          const [rows] = await pool.query('SELECT * FROM user'); // Get all users
+          res.json(rows); // Send the result back as JSON
+      });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Database query failed' });
+  }
+};
+
 module.exports = {
   getUsers,
+  getAllUsers,
   login,
   signup,
   deleteUser,
