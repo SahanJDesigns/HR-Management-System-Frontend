@@ -6,7 +6,11 @@ const multer = require('multer');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 
+<<<<<<< HEAD
 const { login,signup,getUsers,deleteUser,updateUser,getAllUsers } = require('./user');
+=======
+const { login,signup,getUserDetails,deleteUser,updateUser, logout } = require('./user');
+>>>>>>> f1f30a85a1af889df2cdcaefd11bd209189082e7
 const { getJobTitles,getPayGrades,getSupervisors,getDepartments,getBranches } = require('./jobInfo');
 const {createEmployee } = require('./CreateEmployee');
 const { getTodoList,addTodo, deleteTodo, } = require('./todolist');
@@ -37,6 +41,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 app.post('/createEmployee', upload.single('profilePic'), createEmployee);
 
+<<<<<<< HEAD
 app.post('/login',login);
 app.post('/signup',signup);
 app.get('/user',getUsers);
@@ -44,6 +49,14 @@ app.delete('/user',deleteUser);
 app.put('/user',updateUser);
 app.get('/users', getAllUsers); // New endpoint to fetch all users
 
+=======
+app.post('/login',login)
+app.post('/logout',logout)
+app.post('/signup',signup)
+app.get('/user',getUserDetails)
+app.delete('/user',deleteUser)
+app.put('/user',updateUser)
+>>>>>>> f1f30a85a1af889df2cdcaefd11bd209189082e7
 
 app.get('/getJobTitles', getJobTitles);
 app.get('/getPayGrades', getPayGrades);
